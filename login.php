@@ -1,3 +1,11 @@
+<?php include("BD.php"); ?>
+<?php
+session_start();
+if (isset($_SESSION['Usuario_admin'])) {
+	header("location: perfilAdmin.php");
+}else{
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -64,7 +72,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.html" class="logo">
+								<a href="index.php" class="logo">
 									<img src="./img/logo.png" alt="">
 								</a>
 							</div>
@@ -121,13 +129,13 @@
 					<!-- /section title -->
 
 					<!-- Products tab & slick -->
-					<form action="validarDocente.php" class="formulario" method="POST">
+					<form action="ConectarAdmin.php" class="formulario" method="POST">
 					    <h1 class="titulo">Iniciar sesión</h1>
 					    <div class="inputs" style="margin-top: 20px;">
-					      <input type="text" class="formulario__input" name="matricula_docente">
+					      <input type="text" class="formulario__input" name="Usuario_Admin">
 					      <label type="text" class="formulario__label">Matrícula</label>
 
-					      <input type="password" class="formulario__input" name="contrasena_docente">
+					      <input type="password" class="formulario__input" name="Contrasena_Admin">
 					      <label type="text" class="formulario__label">Contraseña</label>
 					    </div>
 					    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3" name="submit">Ingresar</button>
@@ -181,7 +189,7 @@
 							</ul>
 							<h2 class="text-uppercase">Ven y aprovechas las promociones!</h2>
 							<p>pregunta en tu sucursal más cercana</p>
-							<a class="primary-btn cta-btn" href="#">Shop now</a>
+							<a class="primary-btn cta-btn" href="index.php">Shop now</a>
 						</div>
 					</div>
 				</div>
@@ -266,9 +274,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a href="damas.html">Damas</a></li>
-									<li><a href="caballeros.html">Caballeros</a></li>
-									<li><a href="niños.html">Niños</a></li>
+									<li><a href="damas.php">Damas</a></li>
+									<li><a href="caballeros.php">Caballeros</a></li>
+									<li><a href="niños.php">Niños</a></li>
 								</ul>
 							</div>
 						</div>
@@ -279,8 +287,8 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="us.html">Acerca de Nosotros</a></li>
-									<li><a href="contacto">Contactanos</a></li>
+									<li><a href="us.php">Acerca de Nosotros</a></li>
+									<li><a href="contacto.php">Contactanos</a></li>
 								</ul>
 							</div>
 						</div>
@@ -289,11 +297,11 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="index.html">Inicio</a></li>
-									<li><a href="login.html">Login</a></li>
-									<li><a href="damas.html">Damas</a></li>
-									<li><a href="caballeros.html">Caballeros</a></li>
-									<li><a href="niños.html">Niños</a></li>
+									<li><a href="index.php">Inicio</a></li>
+									<li><a href="login.php">Login</a></li>
+									<li><a href="damas.php">Damas</a></li>
+									<li><a href="caballeros.php">Caballeros</a></li>
+									<li><a href="niños.php">Niños</a></li>
 								</ul>
 							</div>
 						</div>
@@ -336,3 +344,4 @@
 
 	</body>
 </html>
+<?php } ?>

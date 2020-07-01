@@ -1,3 +1,11 @@
+<?php include("BD.php"); ?>
+<?php
+session_start();
+if (isset($_SESSION['Usuario_admin'])) {
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -6,7 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Zapatería Arther - niños</title>
+		<title>Zapatería Arther</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -48,7 +56,7 @@
 					</ul>
 					<ul class="header-links pull-right">
 						
-						<li><a href="login.html"><i class="fa fa-user-o"></i> My Account</a></li>
+						<li><a href="CerrarSesion.php"><i class="fa fa-user-o"></i> Salir</a></li>
 					</ul>
 				</div>
 			</div>
@@ -63,7 +71,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.html" class="logo">
+								<a href="index.php" class="logo">
 									<img src="./img/logo.png" alt="">
 								</a>
 							</div>
@@ -101,11 +109,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.html">Inicio</a></li>
-						<li><a href="damas.html">Damas</a></li>
-						<li><a href="caballeros.html">Caballeros</a></li>
-						<li class="active"><a href="niños.html">Niños</a></li>
-						<li><a href="contacto.html">Contactanos</a></li>
+						<li class="active"><a href="index.php">Inicio</a></li>
+						<li><a href="damas.php">Damas</a></li>
+						<li><a href="caballeros.php">Caballeros</a></li>
+						<li><a href="niños.php">Niños</a></li>
+						<li><a href="contacto.php">Contactanos</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -116,57 +124,7 @@
 		<!-- /NAVIGATION -->
 
 		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/dama.jpg" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Sección<br>Dama</h3>
-								<a href="damas.html" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/caballero.jpg" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Sección<br>Caballero</h3>
-								<a href="caballeros.html" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/niño.jpg" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Sección<br>Niños</h3>
-								<a href="niños.html" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
+		
 		<!-- /SECTION -->
 
 		<!-- SECTION -->
@@ -179,7 +137,7 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">Productos Kids</h3>
+							<h3 class="title">Productos</h3>
 							
 						</div>
 					</div>
@@ -387,7 +345,7 @@
 							</ul>
 							<h2 class="text-uppercase">Ven y aprovechas las promociones!</h2>
 							<p>pregunta en tu sucursal más cercana</p>
-							<a class="primary-btn cta-btn" href="#">Shop now</a>
+							<a class="primary-btn cta-btn" href="index.php">Shop now</a>
 						</div>
 					</div>
 				</div>
@@ -462,9 +420,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a href="damas.html">Damas</a></li>
-									<li><a href="caballeros.html">Caballeros</a></li>
-									<li><a href="niños.html">Niños</a></li>
+									<li><a href="damas.php">Damas</a></li>
+									<li><a href="caballeros.php">Caballeros</a></li>
+									<li><a href="niños.php">Niños</a></li>
 								</ul>
 							</div>
 						</div>
@@ -475,8 +433,8 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="us.html">Acerca de Nosotros</a></li>
-									<li><a href="contacto">Contactanos</a></li>
+									<li><a href="us.php">Acerca de Nosotros</a></li>
+									<li><a href="contacto.php">Contactanos</a></li>
 								</ul>
 							</div>
 						</div>
@@ -485,11 +443,11 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="index.html">Inicio</a></li>
-									<li><a href="login.html">Login</a></li>
-									<li><a href="damas.html">Damas</a></li>
-									<li><a href="caballeros.html">Caballeros</a></li>
-									<li><a href="niños.html">Niños</a></li>
+									<li><a href="index.php">Inicio</a></li>
+									<li><a href="login.php">Login</a></li>
+									<li><a href="damas.php">Damas</a></li>
+									<li><a href="caballeros.php">Caballeros</a></li>
+									<li><a href="niños.php">Niños</a></li>
 								</ul>
 							</div>
 						</div>
@@ -532,3 +490,6 @@
 
 	</body>
 </html>
+<?php } else {
+  header("location: index.php");
+} ?>

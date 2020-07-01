@@ -1,3 +1,11 @@
+<?php include("BD.php"); ?>
+<?php
+session_start();
+if (isset($_SESSION['Usuario_admin'])) {
+	header("location: perfilAdmin.php");
+}else{
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -6,7 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Zapatería Arther - Damas</title>
+		<title>Zapatería Arther - Contacto</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -26,6 +34,7 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="css/styles.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,7 +57,7 @@
 					</ul>
 					<ul class="header-links pull-right">
 						
-						<li><a href="login.html"><i class="fa fa-user-o"></i> My Account</a></li>
+						<li><a href="login.php"><i class="fa fa-user-o"></i> My Account</a></li>
 					</ul>
 				</div>
 			</div>
@@ -63,7 +72,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="index.html" class="logo">
+								<a href="index.php" class="logo">
 									<img src="./img/logo.png" alt="">
 								</a>
 							</div>
@@ -101,11 +110,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="index.html">Inicio</a></li>
-						<li class="active"><a href="damas.html">Damas</a></li>
-						<li><a href="caballeros.html">Caballeros</a></li>
-						<li><a href="niños.html">Niños</a></li>
-						<li><a href="contacto.html">Contactanos</a></li>
+						<li><a href="index.php">Inicio</a></li>
+						<li><a href="damas.php">Damas</a></li>
+						<li><a href="caballeros.php">Caballeros</a></li>
+						<li><a href="niños.php">Niños</a></li>
+						<li class="active"><a href="contacto.php">Contactanos</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -129,7 +138,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Sección<br>Dama</h3>
-								<a href="damas.html" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="damas.php" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -143,7 +152,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Sección<br>Caballero</h3>
-								<a href="caballeros.html" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="caballeros.php" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -157,7 +166,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Sección<br>Niños</h3>
-								<a href="niños.html" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="niños.php" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -177,172 +186,26 @@
 				<div class="row">
 
 					<!-- section title -->
-					<div class="col-md-12">
-						<div class="section-title">
-							<h3 class="title">Productos Damas</h3>
-							
-						</div>
-					</div>
+					
 					<!-- /section title -->
 
 					<!-- Products tab & slick -->
-					<div class="col-md-12">
-						<div class="row">
-							<div class="products-tabs">
-								<!-- tab -->
-								<div id="tab1" class="tab-pane active">
-									<div class="products-slick" data-nav="#slick-nav-1">
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product01.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star">hola mundo</i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+					<form action="validarDocente.php" class="formulario" method="POST">
+					    <h1 class="titulo">Contactanos!</h1>
+					    <div class="inputs" style="margin-top: 20px;">
+					      <input type="text" class="formulario__input" name="matricula_docente">
+					      <label type="text" class="formulario__label">Correo</label>
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product02.png" alt="">
-												<div class="product-label">
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+					      <textarea class="formulario__input" id="exampleFormControlTextarea1" rows="3"></textarea>
+					      <label type="text" class="formulario__label">Mensaje</label>
+					    </div>
+					    <button type="submit" class="btn btn-primary btn-lg btn-block mb-3" name="submit">Enviar</button>
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product03.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product04.png" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product05.png" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
-								</div>
-								<!-- /tab -->
-							</div>
-						</div>
-					</div>
+					    <center>
+					      <br>
+					      
+					    </center>
+					  </form>
 					<!-- Products tab & slick -->
 				</div>
 				<!-- /row -->
@@ -387,7 +250,7 @@
 							</ul>
 							<h2 class="text-uppercase">Ven y aprovechas las promociones!</h2>
 							<p>pregunta en tu sucursal más cercana</p>
-							<a class="primary-btn cta-btn" href="#">Shop now</a>
+							<a class="primary-btn cta-btn" href="index.php">Shop now</a>
 						</div>
 					</div>
 				</div>
@@ -462,9 +325,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a href="damas.html">Damas</a></li>
-									<li><a href="caballeros.html">Caballeros</a></li>
-									<li><a href="niños.html">Niños</a></li>
+									<li><a href="damas.php">Damas</a></li>
+									<li><a href="caballeros.php">Caballeros</a></li>
+									<li><a href="niños.php">Niños</a></li>
 								</ul>
 							</div>
 						</div>
@@ -475,8 +338,8 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="us.html">Acerca de Nosotros</a></li>
-									<li><a href="contacto">Contactanos</a></li>
+									<li><a href="us.php">Acerca de Nosotros</a></li>
+									<li><a href="contacto.php">Contactanos</a></li>
 								</ul>
 							</div>
 						</div>
@@ -485,11 +348,11 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="index.html">Inicio</a></li>
-									<li><a href="login.html">Login</a></li>
-									<li><a href="damas.html">Damas</a></li>
-									<li><a href="caballeros.html">Caballeros</a></li>
-									<li><a href="niños.html">Niños</a></li>
+									<li><a href="index.php">Inicio</a></li>
+									<li><a href="login.php">Login</a></li>
+									<li><a href="damas.php">Damas</a></li>
+									<li><a href="caballeros.php">Caballeros</a></li>
+									<li><a href="niños.php">Niños</a></li>
 								</ul>
 							</div>
 						</div>
@@ -532,3 +395,4 @@
 
 	</body>
 </html>
+<?php } ?>
