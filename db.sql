@@ -3,15 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2020 a las 08:49:02
+-- Tiempo de generación: 02-07-2020 a las 06:41:13
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
-
-DROP DATABASE   IF     EXISTS `Arther`;
-CREATE DATABASE IF NOT EXISTS `Arther`;
-USE `Arther`;
-
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,6 +33,14 @@ CREATE TABLE `Administrador` (
   `Contrasena_admin` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `Administrador`
+--
+
+INSERT INTO `Administrador` (`Usuario_admin`, `Contrasena_admin`) VALUES
+('Admin', 'Admin'),
+('Admin', 'Admin');
+
 -- --------------------------------------------------------
 
 --
@@ -48,10 +50,12 @@ CREATE TABLE `Administrador` (
 CREATE TABLE `Inventario` (
   `Id_Producto` int(11) NOT NULL,
   `Descripcion_Producto` varchar(15) NOT NULL,
+  `Categoria_Producto` int(11) NOT NULL,
   `Precio_Producto` float NOT NULL,
   `Talla_Producto` varchar(10) NOT NULL,
   `Stock_Producto` int(10) NOT NULL,
-  `Fecha_adquisicion_Producto` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
+  `Fecha_adquisicion_Producto` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  `Img_Producto` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -79,8 +83,7 @@ CREATE TABLE `Pedido` (
 -- Indices de la tabla `Inventario`
 --
 ALTER TABLE `Inventario`
-  ADD PRIMARY KEY (`Id_Producto`),
-  ADD KEY `Id_Producto` (`Id_Producto`);
+  ADD PRIMARY KEY (`Id_Producto`);
 
 --
 -- Indices de la tabla `Pedido`
@@ -97,23 +100,7 @@ ALTER TABLE `Pedido`
 -- AUTO_INCREMENT de la tabla `Inventario`
 --
 ALTER TABLE `Inventario`
-  MODIFY `Id_Producto` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `Pedido`
---
-ALTER TABLE `Pedido`
-  MODIFY `Id_Pedido` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `Inventario`
---
-ALTER TABLE `Inventario`
-  ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`Id_Producto`) REFERENCES `Pedido` (`Id_Producto`);
+  MODIFY `Id_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

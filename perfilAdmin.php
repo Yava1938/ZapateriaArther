@@ -2,10 +2,7 @@
 <?php
 session_start();
 if (isset($_SESSION['Usuario_admin'])) {
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -34,14 +31,6 @@ if (isset($_SESSION['Usuario_admin'])) {
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
     </head>
 	<body>
 		<!-- HEADER -->
@@ -109,17 +98,158 @@ if (isset($_SESSION['Usuario_admin'])) {
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="index.php">Inicio</a></li>
-						<li><a href="damas.php">Damas</a></li>
-						<li><a href="caballeros.php">Caballeros</a></li>
-						<li><a href="niños.php">Niños</a></li>
-						<li><a href="contacto.php">Contactanos</a></li>
+						<br>
+						<li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button></li>
+						<li><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Modificar</button></li>
+						<li><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal3" data-whatever="@mdo">Eliminar</button></li>
 					</ul>
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<!-- Formulario Registrar-->
+					<div class="modal-content">
+						<div class="modal-header bg-success text-white">
+							<h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo producto</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+						<div class="modal-body">
+							<form action="registrarProducto.php" method="POST" enctype="multipart/form-data">
+								<p>Ingresa los datos requeridos para registrar un nuevo producto.</p>
+								<hr>
+								<div class="form-group">
+									<label for="recipient-name" class="col-form-label">Descripción:</label>
+									<input type="text" class="form-control" id="recipient-name" name="Descripcion_Producto" placeholder="Ej.  Zapatillas Nike Air Force 1">
+								</div>
+								<div class="form-group">
+							      <label for="inputState">Categoría</label>
+							      <select id="inputState" class="form-control" name="Categoria_Producto">
+							        <option selected>Dama</option>
+							        <option>Caballero</option>
+							        <option>Niños</option>
+							      </select>
+							    </div>
+							    <div class="form-group col-md-6">
+							      <label for="inputZip">Precio</label>
+							      <input type="text" class="form-control" id="inputZip" placeholder="Ej.  1500" name="Precio_Producto">
+							    </div>
+							    <div class="form-group col-md-6">
+							      <label for="inputZip">Talla</label>
+							      <input type="number" class="form-control" id="inputZip" name ="Talla_Producto">
+							    </div>
+							    <div class="form-group col-md-6">
+							      <label for="inputZip">Cantidad</label>
+							      <input type="number" class="form-control" id="inputZip" name="Stock_Producto">
+							    </div>
+								<div class="input-group">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="Img">
+										<label class="custom-file-label" for="inputGroupFile04">Selecciona la imagen a cargar...</label>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+									<input type="submit" value="Agregar producto" class="btn btn-success" name="submit">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Formulario Modificar -->
+			<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+
+					<div class="modal-content">
+						<div class="modal-header bg-warning text-dark">
+							<h5 class="modal-title" id="exampleModalLabel">Modificar</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+						<div class="modal-body">
+							<form action="modificarProducto.php" method="POST" enctype="multipart/form-data">
+								<p>Ingresa los datos requeridos modificar algun producto.</p>
+								<hr>
+
+								<div class="form-group">
+				                  <p>Selecciona el producto a eliminar.</p>
+				                  <label for="message-text" class="col-form-label">Descripción de producto:</label>
+				                  <?php
+				                  $consulta = "SELECT * FROM Inventario";
+				                  $query = mysqli_query($conexion_BD, $consulta); ?>
+				                  <select name="Producto">
+				                    <?php while ($producto = mysqli_fetch_assoc($query)) { ?>
+				                      <option><?php echo $producto['Descripcion_Producto'] ?> </option>
+				                    <?php } ?> 
+				                  </select>
+				                </div>
+
+								<div class="form-group col-md-4">
+							      <label for="inputZip">Precio</label>
+							      <input type="text" class="form-control" id="inputZip" placeholder="Ej.  1500" name="Precio">
+							    </div>
+								<br><br><br><br>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+									<input type="submit" value="Modificar producto" class="btn btn-warning" name="submit">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Formulario Eliminar -->
+			<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+
+					<div class="modal-content">
+						<div class="modal-header bg-danger">
+							<h5 class="modal-title" id="exampleModalLabel">Eliminar Producto</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+						<div class="modal-body">
+							<form action="eliminarProducto.php" method="POST" enctype="multipart/form-data">
+								<p>Seleccione el producto a eliminar.</p>
+								<hr>
+								<div class="form-group">
+				                  <p>Selecciona el producto a eliminar.</p>
+				                  <label for="message-text" class="col-form-label">Descripción de producto:</label>
+				                  <?php
+				                  $consulta = "SELECT * FROM Inventario";
+				                  $query = mysqli_query($conexion_BD, $consulta); ?>
+				                  <select name="Producto">
+				                    <?php while ($producto = mysqli_fetch_assoc($query)) { ?>
+				                      <option><?php echo $producto['Descripcion_Producto'] ?> </option>
+				                    <?php } ?> 
+				                  </select>
+				                </div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+									<input type="submit" value="Eliminar producto" class="btn btn-danger" name="submit">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
 					<!-- /NAV -->
 				</div>
 				<!-- /responsive-nav -->
+
 			</div>
 			<!-- /container -->
+			<br>
 		</nav>
 		<!-- /NAVIGATION -->
 
@@ -150,150 +280,36 @@ if (isset($_SESSION['Usuario_admin'])) {
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
+										<?php 
+										$query = "SELECT * FROM Inventario";
+        								$resultadoProducto = mysqli_query($conexion_BD, $query);
+        								while ($card = mysqli_fetch_array($resultadoProducto)) { 
+        								?>
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./img/product01.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
+												<?php 
+												$foto = $card['Img_Producto'];
+												echo "<img src='data:image/jpg; base64," . base64_encode($foto) ."' >"  ?>
 											</div>
 											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star">hola mundo</i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+												<p class="product-category"><?php
+												if ($card['Categoria_Producto'] == 1) {
+													$category = "Caballero";
+												}elseif ($card['Categoria_Producto'] == 2) {
+													$category = "Dama";
+												}else{
+													$category = "Kids";
+												}
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product02.png" alt="">
-												<div class="product-label">
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												?></p>
+												<h3 class="product-name"><a href="#"><?php echo $card['Descripcion_Producto']; ?> </a></h3>
+												<h3 class="product-name"><a href="#"><?php echo $category; ?> </a></h3>
+												<h4 class="product-price"><?php echo "$ " .$card['Precio_Producto']; ?></h4>
 											</div>
 										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product03.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product04.png" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product05.png" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+									<?php }?>
+										
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
@@ -353,16 +369,6 @@ if (isset($_SESSION['Usuario_admin'])) {
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- /HOT DEAL SECTION -->
-
-		<!-- SECTION -->
-		
-		<!-- /SECTION -->
-
-		<!-- SECTION -->
-		
-		<!-- /SECTION -->
-
 		<!-- NEWSLETTER -->
 		<div id="newsletter" class="section">
 			<!-- container -->
@@ -395,7 +401,6 @@ if (isset($_SESSION['Usuario_admin'])) {
 			<!-- /container -->
 		</div>
 		<!-- /NEWSLETTER -->
-
 		<!-- FOOTER -->
 		<footer id="footer">
 			<!-- top footer -->
