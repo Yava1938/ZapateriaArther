@@ -233,9 +233,19 @@ if (isset($_SESSION['Usuario_admin'])) {
 												}
 
 												?></p>
-												<h3 class="product-name"><a href="#"><?php echo $card['Descripcion_Producto']; ?> </a></h3>
-												<h3 class="product-name"><a href="#"><?php echo $category; ?> </a></h3>
-												<h4 class="product-price"><?php echo "$ " .$card['Precio_Producto']; ?></h4>
+												<h3 class="product-name"><?php echo $card['Descripcion_Producto']; ?> </h3>
+												<h3 class="product-name"><?php echo $category; ?> </h3>
+												<h4 class="product-price"><?php 
+												if ($card['Descuento_Producto'] > 0) {
+													$pr = $card['Descuento_Producto'] * $card['Precio_Producto'];
+													$Ccf = $pr/100;
+													$Cf = $card['Precio_Producto'] - $Ccf;
+												}else{
+													$Cf = $card['Precio_Producto'];
+												}
+												
+
+												echo "$ " .$Cf; ?></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -261,7 +271,7 @@ if (isset($_SESSION['Usuario_admin'])) {
 														</div>
 
 														<div class="modal-body">
-															<form action="registrarPedido.php.php" method="POST" enctype="multipart/form-data">
+															<form action="registrarPedido.php" method="POST" enctype="multipart/form-data">
 																<p>Seleccione el producto que desee apartar.</p>
 																<hr>
 																<div class="form-group">
@@ -275,14 +285,10 @@ if (isset($_SESSION['Usuario_admin'])) {
 												                    <?php } ?> 
 												                  </select>
 												                </div>
-												                <div class="form-group col-md-6">
+												                <div class="form-group col-md-4">
 															      <label for="inputZip">Cantidad</label>
 															      <input type="number" class="form-control" id="inputZip" name="Cantidad">
 															    </div>
-															    <div class="form-group col-md-6">
-																	<label for="recipient-name" class="col-form-label">Precio:</label>
-																	<input type="text" class="form-control" id="recipient-name" name="Precio" >
-																</div>
 																<div class="form-group col-md-8">
 																	<label for="recipient-name" class="col-form-label">Nombre de cliente::</label>
 																	<input type="text" class="form-control" id="recipient-name" name="Nombre_Cliente" placeholder="Ej.  Benito Antonio Martínez Ocasio">
@@ -290,7 +296,7 @@ if (isset($_SESSION['Usuario_admin'])) {
 
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-																		<input type="submit" value="Eliminar producto" class="btn btn-info" name="submit">
+																		<input type="submit" value="Apartar producto" class="btn btn-info" name="submit">
 																	</div>
 																</form>
 															</div>

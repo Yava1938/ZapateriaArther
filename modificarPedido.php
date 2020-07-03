@@ -17,7 +17,7 @@ include ("BD.php");
 		    echo '<script>
 		    			alert("Producto registrada correctamente");
 		    			</script>';
-		    header("location: perfilAdmin.php");
+		    header("location: pedidos.php");
 		    die();
 		}
 

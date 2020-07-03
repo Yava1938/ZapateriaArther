@@ -57,7 +57,9 @@ FROM actividades a INNER JOIN ubicaciones u
         INNER JOIN estudiante e
             ON a.id_alumno = e.id_alumno";*/
 
-$sql ="SELECT * FROM Pedido WHERE Estado_Pedido ='Cancelada'";            
+$sql ="Select Id_Pedido, I.Descripcion_Producto,Cantidad_Producto, Precio_Pedido, Cliente_Pedido, Estado_Pedido, Token_Pedido, Fecha_Pedido
+From Inventario I, Pedido c 
+WHERE (I.Id_Producto = c.Id_Producto) AND c.Estado_Pedido = 'Cancelada'"; 
 $res = $conexion_BD->query($sql);
 
 
@@ -71,7 +73,7 @@ $pdf->SetFont('Arial','',6);
 while ($row =  mysqli_fetch_array($res))
 {
     $pdf->cell(10, 10, $row['Id_Pedido'], 1, 0, 'C', 0);
-    $pdf->cell(15, 10, $row['Id_Producto'], 1, 0, 'C', 0);
+    $pdf->cell(15, 10, $row['Descripcion_Producto'], 1, 0, 'C', 0);
     $pdf->cell(15, 10, $row['Cantidad_Producto'], 1, 0, 'C', 0);
     $pdf->cell(15, 10, $row['Precio_Pedido'], 1, 0, 'C', 0);
     $pdf->cell(30, 10, $row['Cliente_Pedido'], 1, 0, 'C', 0);
