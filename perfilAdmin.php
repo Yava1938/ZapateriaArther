@@ -61,21 +61,14 @@ if (isset($_SESSION['Usuario_admin'])) {
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="index.php" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="./img/arther.png" alt="">
 								</a>
 							</div>
 						</div>
 						<!-- /LOGO -->
 
 						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
-								</form>
-							</div>
-						</div>
+						
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
@@ -102,6 +95,13 @@ if (isset($_SESSION['Usuario_admin'])) {
 						<li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button></li>
 						<li><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Modificar</button></li>
 						<li><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal3" data-whatever="@mdo">Eliminar</button></li>
+						
+					</ul>
+					<ul class="header-links pull-right">
+						<br>
+						<li><a href="pedidos.php"><button type="button" class="btn btn-primary">Pedidos</button></a></li>
+						<li><a href="ReportesCancelados.php"><button type="button" class="btn btn-primary">Reportes canelados</button></a></li>
+						<li><a href="ReportesVendidos.php"><button type="button" class="btn btn-primary">Reportes Vendidos</button></a></li>
 					</ul>
 					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -359,9 +359,9 @@ if (isset($_SESSION['Usuario_admin'])) {
 									</div>
 								</li>
 							</ul>
-							<h2 class="text-uppercase">Ven y aprovechas las promociones!</h2>
-							<p>pregunta en tu sucursal más cercana</p>
-							<a class="primary-btn cta-btn" href="index.php">Shop now</a>
+							<h2 class="text-uppercase">Crea descuentos para tus clientes!</h2>
+							<p>Registra los descuentos</p>
+							<a class="primary-btn cta-btn" data-toggle="modal" data-target="#exampleModal4" data-whatever="@mdo">Nuevo descuento</a>
 						</div>
 					</div>
 				</div>
@@ -369,37 +369,64 @@ if (isset($_SESSION['Usuario_admin'])) {
 			</div>
 			<!-- /container -->
 		</div>
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+		<!-- Generador de descuentos-->
+		<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+
+					<div class="modal-content">
+						<div class="modal-header bg-info text-white">
+							<h5 class="modal-title" id="exampleModalLabel">Crear descuento</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+						<div class="modal-body">
+							<form action="descuentoProducto.php" method="POST" enctype="multipart/form-data">
+								<p>Ingresa los datos requeridos modificar algun producto.</p>
+								<hr>
+
+								<div class="form-group">
+				                  <p>Selecciona el producto a eliminar.</p>
+				                  <label for="message-text" class="col-form-label">Descripción de producto:</label>
+				                  <?php
+				                  $consulta = "SELECT * FROM Inventario";
+				                  $query = mysqli_query($conexion_BD, $consulta); ?>
+				                  <select name="Producto">
+				                    <?php while ($producto = mysqli_fetch_assoc($query)) { ?>
+				                      <option><?php echo $producto['Descripcion_Producto'] ?> </option>
+				                    <?php } ?> 
+				                  </select>
+				                </div>
+
+								<div class="form-group col-md-4">
+							      <label for="inputState">Descuento</label>
+							      <select id="inputState" class="form-control" name="Descuento">
+							        <option selected>0</option>
+							        <option>10</option>
+							        <option>20</option>
+							        <option>30</option>
+							        <option>40</option>
+							        <option>50</option>
+							        <option>60</option>
+							        <option>70</option>
+							        <option>80</option>
+							        <option>90</option>
+							      </select>
+							    </div>
+								<br><br><br><br>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+									<input type="submit" value="Registrar descuento" class="btn btn-info" name="submit">
+								</div>
 							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="https://twitter.com/explore"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
-								</li>
-							</ul>
 						</div>
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
-		</div>
+		<!-- Fin Generador de descuentos-->
+		<!-- NEWSLETTER -->
+		
 		<!-- /NEWSLETTER -->
 		<!-- FOOTER -->
 		<footer id="footer">

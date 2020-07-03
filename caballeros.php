@@ -72,7 +72,7 @@ if (isset($_SESSION['Usuario_admin'])) {
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="index.html" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="./img/arther.png" alt="">
 								</a>
 							</div>
 						</div>
@@ -81,8 +81,8 @@ if (isset($_SESSION['Usuario_admin'])) {
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<input class="input" placeholder="Search here">
+								<form action="buscar.php" method="POST" enctype="multipart/form-data">
+									<input class="input" placeholder="Search here" name="buscar">
 									<button class="search-btn">Search</button>
 								</form>
 							</div>
@@ -200,158 +200,116 @@ if (isset($_SESSION['Usuario_admin'])) {
 								<!-- tab -->
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
+										<?php 
+										$query = "SELECT * FROM Inventario  WHERE Categoria_Producto = '1'";
+        								$resultadoProducto = mysqli_query($conexion_BD, $query);
+        								while ($card = mysqli_fetch_array($resultadoProducto)) { 
+        								?>
 										<!-- product -->
 										<div class="product">
 											<div class="product-img">
-												<img src="./img/product01.png" alt="">
+												<?php 
+												$foto = $card['Img_Producto'];
+												echo "<img src='data:image/jpg; base64," . base64_encode($foto) ."' >"  ?>
 												<div class="product-label">
-													<span class="sale">-30%</span>
+													<?php if ($card['Descuento_Producto'] > 0) {
+
+													?>
+													<span class="sale"> <?php echo "-".$card['Descuento_Producto']."%";?></span>
 													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star">hola mundo</i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+													<?php  
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product02.png" alt="">
-												<div class="product-label">
-													<span class="new">NEW</span>
+													}?>
 												</div>
 											</div>
 											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+												<p class="product-category"><?php
+												if ($card['Categoria_Producto'] == 1) {
+													$category = "Caballero";
+												}elseif ($card['Categoria_Producto'] == 2) {
+													$category = "Dama";
+												}else{
+													$category = "Kids";
+												}
 
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product03.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product04.png" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+												?></p>
+												<h3 class="product-name"><a href="#"><?php echo $card['Descripcion_Producto']; ?> </a></h3>
+												<h3 class="product-name"><a href="#"><?php echo $category; ?> </a></h3>
+												<h4 class="product-price"><?php echo "$ " .$card['Precio_Producto']; ?></h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<button class="add-to-cart-btn" data-toggle="modal" data-target="#exampleModal3" data-whatever="@mdo"> Realiza tu pedido</button>	
 											</div>
 										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product05.png" alt="">
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-										<!-- /product -->
+										<?php }?>
 									</div>
+									<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+
+													<div class="modal-content">
+														<div class="modal-header bg-info">
+															<h5 class="modal-title" id="exampleModalLabel">Apartar Producto</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+
+														<div class="modal-body">
+															<form action="registrarPedido.php.php" method="POST" enctype="multipart/form-data">
+																<p>Seleccione el producto que desee apartar.</p>
+																<hr>
+																<div class="form-group">
+												                  <label for="message-text" class="col-form-label">Descripción de producto:</label>
+												                  <?php
+												                  $consulta = "SELECT * FROM Inventario WHERE Categoria_Producto = '1'";
+												                  $query = mysqli_query($conexion_BD, $consulta); ?>
+												                  <select name="Producto">
+												                    <?php while ($producto = mysqli_fetch_assoc($query)) { ?>
+												                      <option><?php echo $producto['Descripcion_Producto'] ?> </option>
+												                    <?php } ?> 
+												                  </select>
+												                </div>
+												                <div class="form-group col-md-6">
+															      <label for="inputZip">Cantidad</label>
+															      <input type="number" class="form-control" id="inputZip" name="Cantidad">
+															    </div>
+															    <div class="form-group col-md-6">
+																	<label for="recipient-name" class="col-form-label">Precio:</label>
+																	<input type="text" class="form-control" id="recipient-name" name="Precio" >
+																</div>
+																<div class="form-group col-md-8">
+																	<label for="recipient-name" class="col-form-label">Nombre de cliente::</label>
+																	<input type="text" class="form-control" id="recipient-name" name="Nombre_Cliente" placeholder="Ej.  Benito Antonio Martínez Ocasio">
+																</div><br><br><br><br><br><br><br>
+
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+																		<input type="submit" value="Eliminar producto" class="btn btn-info" name="submit">
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+
 									<div id="slick-nav-1" class="products-slick-nav"></div>
+
 								</div>
 								<!-- /tab -->
+
 							</div>
+
 						</div>
+
 					</div>
 					<!-- Products tab & slick -->
+
 				</div>
 				<!-- /row -->
 			</div>

@@ -28,7 +28,7 @@ if(isset($_POST["submit"])){
 				{
 					$categoria = 3;
 				}
-				        $sql="INSERT INTO Inventario  VALUES (null,'$Descripcion_Producto','$categoria','$Precio_Producto','$Talla_Producto','$Stock_Producto',CURRENT_TIME(),'$Img_Producto');";
+				        $sql="INSERT INTO Inventario  VALUES (null,'$Descripcion_Producto','$categoria','$Precio_Producto','$Talla_Producto','$Stock_Producto',CURRENT_TIME(),'$Img_Producto','0');";
 				$verificarProducto = mysqli_query( $conexion_BD, "SELECT Descripcion_Producto FROM Inventario WHERE Descripcion_Producto='$Descripcion_Producto';");
 
 				if (mysqli_num_rows($verificarProducto) > 0 ) 
