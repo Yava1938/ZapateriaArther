@@ -19,18 +19,16 @@ include("BD.php");
 				    if(!$ejecutar)
 				    {
 				    	echo"Error al registrar el producto.";
-				         echo $Cantidad."<br>";
-				         echo $Precio."<br>";
-				         echo $Nombre_Cliente."<br>";
-				         echo $Token."<br>";
-				         echo $fecha. "<br>";	
-				         echo $Estado;
+				         
 				    }else
 				    {
-				    	echo '<script>
-   			 			alert("Pedido registrado correctamente")
-   			 			</script>';
-				        header("location: damas.php");
+				    	header("location: index.php");
+				    	$mensaje = "Se registro un pedido a nombre de: ".$Nombre_Cliente." Su Token es: ".$Token." Tiene un plazo de 3 días para recoger su pedido o se cancelara.";
+				    	 echo "<script>
+						       alert('$mensaje');
+						       </script>";
 				    	die();
+				    	
 				    }
+
  ?>
